@@ -1,4 +1,5 @@
-
+package java;
+//scanner must be initiated and scanner.nextline is used to go to next line
 import java.util.Scanner;
 
 public class Solution {
