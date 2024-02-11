@@ -1,0 +1,11 @@
+#Average of list in python
+n=eval(input())
+def AvgList(n):
+    
+    sum=0
+    for i in n:
+        sum+=i
+    return sum/len(n)
+print(AvgList(n))
+
+
