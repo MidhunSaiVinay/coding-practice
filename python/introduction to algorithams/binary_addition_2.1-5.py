@@ -7,7 +7,7 @@ def binary_addition(bin1, bin2):
     carry = 0
     sum_list = []
 
-    # Iterate through the lists
+    # Iterate through the lists 
     for i in range(max(len(bin1), len(bin2))):
         # Get the bits from the lists or use 0 if the list is shorter
         bit1 = bin1[i] if i < len(bin1) else 0
