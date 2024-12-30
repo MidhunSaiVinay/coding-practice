@@ -17,5 +17,21 @@
 - **Transpose**
 converting row vector to column and column to row
 
-$m_{i,j}$  
-$T = m_{j,i}$
+$$
+m_{i,j}$ = m_{j,i}
+$$
+
+- **Vector Magnitude**
+Length or norm of vector
+
+
+$$
+\| v \| = \sum_{i=1}^{n} v_i^2
+$$
+
+- **Vector Dot Product**
+
+$$
+\delta = \sum_{i=1}^{n} a_i b_i
+$$
+

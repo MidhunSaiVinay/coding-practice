@@ -27,3 +27,11 @@ print(b*s)
 s = 2
 v = np.array([3,6])
 print(s+v)
+
+#vector length
+v = np.array([1,2,3,7,8,9])
+v_dim = len(v)  # math dimensionality
+v_mag = np.linalg.norm(v) # math magnitude, length, or norm
+
+print(f'v_dim: {v_dim}')
+
