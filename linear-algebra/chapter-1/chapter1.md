@@ -53,29 +53,7 @@
     
     Element-wise multiplication of two vectors.
 
-    $$
-    \begin{bmatrix}
-    5 \\
-    4 \\
-    8 \\
-    2
-    \end{bmatrix}
-    \odot
-    \begin{bmatrix}
-    1 \\
-    0 \\
-    0.5 \\
-    -1
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-    5 \\
-    0 \\
-    4 \\
-    -2
-    \end{bmatrix}
-    $$
-
+    
 - **Orthogonal Vector Decomposition:**
 
     Decomposition of a vector into two orthogonal (perpendicular) components.
