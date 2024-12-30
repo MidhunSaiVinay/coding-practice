@@ -1,6 +1,6 @@
 # Vectors Part 1
 
-- **Dimensionality:**:
+- **Dimensionality:**
 
  The number of numbers in the vector.
  
@@ -13,3 +13,9 @@
 
  Whether the vector is in column orientation (standing up tall) or row orientation
  (laying flat and wide)
+
+- **Transpose**
+converting row vector to column and column to row
+
+$m_{i,j}$  
+$T = m_{j,i}$
