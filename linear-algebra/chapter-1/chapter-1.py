@@ -35,3 +35,32 @@ v_mag = np.linalg.norm(v) # math magnitude, length, or norm
 
 print(f'v_dim: {v_dim}')
 
+#vector dot product
+v = np.array([1,2,3,4])
+w = np.array([5,6,7,8])
+d=np.dot(v,w)
+print(f'dot product: {d}')
+
+##dot product by multiplying scaalr elements
+s = 10
+d=np.dot(s*v,w)
+
+print(f'dot product: {d}')
+
+# distributive property of dot product
+a = np.array([ 0,1,2 ])
+b = np.array([ 3,5,8 ])
+c = np.array([ 13,21,34 ])
+# the dot product is distributive
+res1 = np.dot( a, b+c )
+res2 = np.dot( a,b ) + np.dot( a,c )
+print(f'res1: {res1}')
+print(f'res2: {res2}')
+
+
+#hadmard multiplication
+a = np.array([5,4,8,2])
+b = np.array([1,0,.5])
+c = a * b
+
+print(f'c: {c}')
