@@ -23,7 +23,7 @@ class Solution:
     
 # Example usage:
 root = TreeNode(1)
-root.left = TreeNode(2)
+root.left = TreeNode(5)
 root.right = TreeNode(3)
 root.left.left = TreeNode(4)
 root.left.right = TreeNode(5)
