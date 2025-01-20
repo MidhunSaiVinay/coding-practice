@@ -33,16 +33,19 @@ Detect anomalies in real-time from a streaming data source of financial transact
 1. **Install Required Tools:**
 
     - Apache Kafka: [Download Kafka](https://kafka.apache.org/downloads) and follow the setup instructions.
-    - **Windows:** Download the latest Kafka binary from [Kafka Downloads](https://kafka.apache.org/downloads). Extract the files and navigate to the Kafka directory. Open a command prompt and start the Zookeeper server:
-      ```bash
-      .\bin\windows\zookeeper-server-start.bat ^
-      .\config\zookeeper.properties
-      ```
-      In another command prompt, start the Kafka server:
-      ```bash
-      .\bin\windows\kafka-server-start.bat ^
-      .\config\server.properties
-      ```
+    - **Ubuntu:** Download the latest Kafka binary from [Kafka Downloads](https://kafka.apache.org/downloads). Extract the files and navigate to the Kafka directory. Open a terminal and start the Zookeeper server:
+        ```bash
+        # Build the Kafka project
+        cd /home/vagrant/kafka-3.8.1-src
+        ./gradlew jar -PscalaVersion=2.13.14
+
+        # Start Zookeeper server
+        /home/vagrant/kafka-3.8.1-src/bin/zookeeper-server-start.sh /home/vagrant/kafka-3.8.1-src/config/zookeeper.properties
+        ```
+        In another terminal, start the Kafka server:
+        ```bash
+        /home/vagrant/kafka-3.8.1-src/bin/kafka-server-start.sh /home/vagrant/kafka-3.8.1-src/config/server.properties
+        ```
     - Apache Spark: [Download Spark](https://spark.apache.org/downloads.html) for your operating system and set up the environment variables.
 
       **Windows Example:**
@@ -89,7 +92,7 @@ Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, a
     import time
     import random
 
-    producer = KafkaProducer(bootstrap_servers='localhost:9092',
+    producer = KafkaProducer(bootstrap_servers='VK521:9092',
                              value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
     while True:
