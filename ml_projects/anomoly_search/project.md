@@ -83,6 +83,8 @@ Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, a
 
 ### **Step 3: Data Simulation and Ingestion**
 
+### **Step 3: Data Simulation and Ingestion**
+
 1. **Simulate Streaming Data:**
     Create a Python script to simulate financial transaction data:
 
@@ -92,7 +94,7 @@ Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, a
     import time
     import random
 
-    producer = KafkaProducer(bootstrap_servers='VK521:9092',
+    producer = KafkaProducer(bootstrap_servers='localhost:9092',
                              value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
     while True:
@@ -108,6 +110,40 @@ Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, a
         time.sleep(1)
     ```
 
+    **Where to Run the Script:**
+    
+    Since Kafka is running on your Ubuntu machine, execute this Python script on the same server to ensure seamless connectivity.
+
+    **Steps:**
+    
+    1. **Save the Script:**
+        Save the above code as `simulate_transactions.py` on your Ubuntu server.
+    
+    2. **Install Dependencies:**
+        ```bash
+        pip install kafka-python
+        ```
+    
+    3. **Run the Script:**
+        ```bash
+        python3 simulate_transactions.py
+        ```
+
+2. **Create Kafka Topic:**
+    
+    ```bash
+    bin/kafka-topics.sh --create --topic transaction_data --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+    ```
+
+3. **Integration of Scripts:**
+    
+    - **Producer Script (`simulate_transactions.py`):** Generates and sends simulated transaction data to the `transaction_data` Kafka topic.
+    - **Kafka Server:** Manages the `transaction_data` topic and handles message brokering.
+    - **Spark Streaming:** Consumes data from Kafka for real-time processing and anomaly detection.
+    - **Machine Learning Model:** Processes the ingested data to identify anomalies.
+    - **Deployment Scripts:** Handle the deployment of processed data and models to AWS services.
+
+
 2. **Create Kafka Topic:**
 
     ```bash
@@ -116,10 +152,14 @@ Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, a
 
 ---
 
+
+
 ### **Step 4: Stream Processing with Spark**
 
 1. **Initialize Spark Streaming:**
+    
     Create a PySpark script to consume data from Kafka:
+    
     ```python
     from pyspark.sql import SparkSession
     from pyspark.sql.functions import from_json, col
@@ -146,8 +186,23 @@ Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, a
     query = parsed_df.writeStream.format("console").start()
     query.awaitTermination()
     ```
+    
+2. **Running the Spark Streaming Script:**
 
----
+    - **Ensure Kafka is Running:**
+        Before running the Spark script, make sure that the Kafka server is up and the `transaction_data` topic is active.
+
+    - **Execute the Script:**
+        Navigate to the directory containing your PySpark script and run the following command:
+        
+        ```bash
+        spark-submit your_script_name.py
+        ```
+        
+        Replace `your_script_name.py` with the actual name of your PySpark script.
+
+    - **Monitor the Output:**
+        The script will output the streaming data to the console. Verify that the data is being consumed correctly.
 
 ### **Step 5: Train the Machine Learning Model**
 
