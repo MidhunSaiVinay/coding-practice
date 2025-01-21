@@ -3,11 +3,9 @@ from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, DoubleType, StringType, LongType
 
 spark = SparkSession.builder.appName("RealTimeAnomalyDetection")\
-         .config("spark.sql.streaming.checkpointLocation", "./checkpoint")\
-         .config("spark.jars.packages", 
-        "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1,"
-        "org.apache.kafka:kafka-clients:3.5.1")\
-         .getOrCreate()
+    .config("spark.sql.streaming.checkpointLocation", "./checkpoint")\
+    .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.4,org.apache.kafka:kafka-clients:3.9.0")\
+    .getOrCreate()
     
 
 schema = StructType()\
