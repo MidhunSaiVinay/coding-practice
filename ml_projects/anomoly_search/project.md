@@ -65,127 +65,18 @@ Detect anomalies in real-time from a streaming data source of financial transact
       ```
 
 2. **Verify Installations:**
-
+    
     - Start Kafka and Spark locally to ensure proper setup.
       ```bash
       # Start Kafka Zookeeper
-      bin/zookeeper-server-start.sh config/zookeeper.properties
-      # Start Kafka server
-      bin/kafka-server-start.sh config/server.properties
+
+      # Download the Spark-Kafka Connector Jar
+      wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.13/3.5.4/spark-sql-kafka-0-10_2.13-3.5.4.jar
+
+      # Move the Jar to Spark's `jars` Directory
+      mv spark-sql-kafka-0-10_2.13-3.5.4.jar $SPARK_HOME/jars/
       ```
 
-```bash
-aws configure
-```
-Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, and output format. This command can be run in any terminal, including the integrated terminal in VS Code. These credentials are used for all AWS services, including EC2.
-
----
-
-### **Step 3: Data Simulation and Ingestion**
-
-### **Step 3: Data Simulation and Ingestion**
-
-1. **Simulate Streaming Data:**
-    Create a Python script to simulate financial transaction data:
-
-    ```python
-    from kafka import KafkaProducer
-    import json
-    import time
-    import random
-
-    producer = KafkaProducer(bootstrap_servers='localhost:9092',
-                             value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-
-    while True:
-        data = {
-            "timestamp": time.time(),
-            "transaction_id": random.randint(1000, 9999),
-            "amount": random.uniform(10, 1000),
-            "account_id": random.randint(1, 100),
-            "transaction_type": random.choice(["debit", "credit"])
-        }
-        producer.send('transaction_data', data)
-        print(f"Sent: {data}")
-        time.sleep(1)
-    ```
-
-    **Where to Run the Script:**
-    
-    Since Kafka is running on your Ubuntu machine, execute this Python script on the same server to ensure seamless connectivity.
-
-    **Steps:**
-    
-    1. **Save the Script:**
-        Save the above code as `simulate_transactions.py` on your Ubuntu server.
-    
-    2. **Install Dependencies:**
-        ```bash
-        pip install kafka-python
-        ```
-    
-    3. **Run the Script:**
-        ```bash
-        python3 simulate_transactions.py
-        ```
-
-2. **Create Kafka Topic:**
-    
-    ```bash
-    bin/kafka-topics.sh --create --topic transaction_data --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-    ```
-
-3. **Integration of Scripts:**
-    
-    - **Producer Script (`simulate_transactions.py`):** Generates and sends simulated transaction data to the `transaction_data` Kafka topic.
-    - **Kafka Server:** Manages the `transaction_data` topic and handles message brokering.
-    - **Spark Streaming:** Consumes data from Kafka for real-time processing and anomaly detection.
-    - **Machine Learning Model:** Processes the ingested data to identify anomalies.
-    - **Deployment Scripts:** Handle the deployment of processed data and models to AWS services.
-
-
-2. **Create Kafka Topic:**
-
-    ```bash
-    bin/kafka-topics.sh --create --topic transaction_data --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-    ```
-
----
-
-
-
-### **Step 4: Stream Processing with Spark**
-
-1. **Initialize Spark Streaming:**
-    
-    Create a PySpark script to consume data from Kafka:
-    
-    ```python
-    from pyspark.sql import SparkSession
-    from pyspark.sql.functions import from_json, col
-    from pyspark.sql.types import StructType, DoubleType, StringType, LongType
-
-    spark = SparkSession.builder.appName("RealTimeAnomalyDetection")\
-        .config("spark.sql.streaming.checkpointLocation", "./checkpoint")\
-        .getOrCreate()
-
-    schema = StructType()\
-        .add("timestamp", DoubleType())\
-        .add("transaction_id", LongType())\
-        .add("amount", DoubleType())\
-        .add("account_id", LongType())\
-        .add("transaction_type", StringType())
-
-    df = spark.readStream.format("kafka")\
-        .option("kafka.bootstrap.servers", "localhost:9092")\
-        .option("subscribe", "transaction_data")\
-        .load()
-
-    parsed_df = df.select(from_json(col("value"), schema).alias("data")).select("data.*")
-
-    query = parsed_df.writeStream.format("console").start()
-    query.awaitTermination()
-    ```
     
 2. **Running the Spark Streaming Script:**
 
@@ -196,13 +87,18 @@ Follow the prompts to enter your AWS Access Key ID, Secret Access Key, region, a
         Navigate to the directory containing your PySpark script and run the following command:
         
         ```bash
-        spark-submit your_script_name.py
+        # Ensure Spark is installed and environment variables are set
+        export SPARK_HOME=/home/vagrant/spark
+        export PATH=$SPARK_HOME/bin:$PATH
+
+        # Run the Spark script
+        spark-submit data_consumption_spark.py
         ```
         
         Replace `your_script_name.py` with the actual name of your PySpark script.
 
     - **Monitor the Output:**
-        The script will output the streaming data to the console. Verify that the data is being consumed correctly.
+        Run the script on your local machine or server where Spark is installed. The script will output the streaming data to the console. Verify that the data is being consumed correctly.
 
 ### **Step 5: Train the Machine Learning Model**
 

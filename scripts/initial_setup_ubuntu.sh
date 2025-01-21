@@ -17,11 +17,10 @@ sudo apt install openjdk-11-jdk
 
 sudo apt install r-base
 
-wget https://dlcdn.apache.org/spark/spark-3.5.2/spark-3.5.2-bin-hadoop3.tgz
+wget https://archive.apache.org/dist/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
+tar -xvzf spark-3.5.1-bin-hadoop3.tgz
 
-tar -xvzf spark-3.5.2-bin-hadoop3.tgz
-
-mv spark-3.5.2-bin-hadoop3 spark
+mv spark-3.5.1-bin-hadoop3 spark
 
 #!/bin/bash
 
