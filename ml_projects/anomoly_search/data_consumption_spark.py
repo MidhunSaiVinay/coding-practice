@@ -3,6 +3,7 @@ from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, DoubleType, StringType, LongType
 
 spark = SparkSession.builder.appName("RealTimeAnomalyDetection")\
+    .config("spark.sql.streaming.checkpointLocation", "./checkpoint")\
     .getOrCreate()
     
 
