@@ -4,6 +4,7 @@ from pyspark.sql.types import StructType, DoubleType, StringType, LongType
 
 spark = SparkSession.builder.appName("RealTimeAnomalyDetection")\
     .config("spark.sql.streaming.checkpointLocation", "./checkpoint")\
+    .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.4,org.apache.kafka:kafka-clients:3.9.0,org.scala-lang:scala-library:2.12.18")\
     .getOrCreate()
     
 
