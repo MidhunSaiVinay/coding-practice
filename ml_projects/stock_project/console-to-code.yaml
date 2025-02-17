@@ -1,0 +1,78 @@
+CFN/YAML
+
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'AWS CloudFormation template to create resources based on provided CLI commands'
+
+Resources:
+
+  LaunchWizard1SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: launch-wizard-1
+      GroupDescription: launch-wizard-1 created 2025-02-14T23:37:37.840Z
+      VpcId: vpc-0bbb7673f5274d95d
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  StockProjectInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0cb91c7de36eed2cb
+      InstanceType: t2.micro
+      KeyName: stock_vm
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            Encrypted: false
+            DeleteOnTermination: true
+            Iops: 3000
+            SnapshotId: snap-0f7d22fe26267cbc5
+            VolumeSize: 30
+            VolumeType: gp3
+            Throughput: 125
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          GroupSet:
+            - !Ref LaunchWizard1SecurityGroup
+      CreditSpecification:
+        CPUCredits: standard
+      Tags:
+        - Key: Name
+          Value: stock_project
+      MetadataOptions:
+        HttpEndpoint: enabled
+        HttpPutResponseHopLimit: 2
+        HttpTokens: required
+      PrivateDnsNameOptions:
+        HostnameType: ip-name
+        EnableResourceNameDnsARecord: true
+        EnableResourceNameDnsAAAARecord: false
+
+Reasoning:
+
+1) Libraries and their versions used in the generated YAML: AWS CloudFormation YAML template version 2010-09-09.
+
+2) AWS resources impacted by the YAML: AWS::EC2::SecurityGroup, AWS::EC2::Instance.
+
+3) AWS actions performed in the YAML: Create a security group with specified ingress rules, create an EC2 instance with specified configurations.
+
+4) Explanation of the generated YAML output:
+   - The YAML creates an AWS::EC2::SecurityGroup resource named 'LaunchWizard1SecurityGroup' with the specified group name, description, VPC ID, and ingress rules for TCP ports 22, 443, and 80 from any IP address (0.0.0.0/0).
+   - The YAML creates an AWS::EC2::Instance resource named 'StockProjectInstance' with the specified image ID, instance type, key name, block device mapping, network interface (associated with the created security group), CPU credit specification, tags, metadata options, and private DNS name options.
+   - The instance is configured to have a public IP address and use the 'stock_vm' key pair for SSH access.
+   - The block device mapping specifies a 30 GB gp3 volume with 3000 IOPS and 125 MB/s throughput, created from the specified snapshot.
+   - The metadata options enable the HTTP endpoint, set the hop limit to 2, and require HTTP tokens.
+   - The private DNS name options configure the hostname type to 'ip-name' and enable the resource name DNS A record.
