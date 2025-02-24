@@ -1,8 +1,37 @@
-# Aws Data Engineers Toolkit
+# AWS Data Engineers Toolkit
 
-### Amazon Database Migration Service
+## Table of Contents
+- [Amazon Database Migration Service](#amazon-database-migration-service)
+- [Amazon Kinesis for Streaming Data Ingestion](#amazon-kinesis-for-streaming-data-ingestion)
+  - [Kinesis Data Firehose](#kinesis-data-firehose)
+  - [Kinesis Data Streams](#kinesis-data-streams)
+  - [Kinesis Data Analytics](#kinesis-data-analytics)
+  - [Kinesis Video Streams](#kinesis-video-streams)
+- [Amazon Kinesis Agent](#amazon-kinesis-agent)
+- [Amazon Kinesis Firehose](#amazon-kinesis-firehose)
+- [Amazon Kinesis Data Streams](#amazon-kinesis-data-streams)
+- [Amazon Kinesis Data Analytics](#amazon-kinesis-data-analytics)
+- [Amazon Kinesis Video Streams](#amazon-kinesis-video-streams)
+- [Amazon MSK for Streaming Data](#amazon-msk-for-streaming-data)
+- [Amazon AppFlow for SaaS Data Integration](#amazon-appflow-for-saas-data-integration)
+- [AWS Transfer Family](#aws-transfer-family)
+- [AWS DataSync for Multi-Source Ingestion](#aws-datasync-for-multi-source-ingestion)
+- [AWS Snow Family for Large Data Transfers](#aws-snow-family-for-large-data-transfers)
+- [AWS Glue for Data Ingestion](#aws-glue-for-data-ingestion)
+- [AWS Lambda for Data Transformation](#aws-lambda-for-data-transformation)
+- [AWS Glue ETL Components](#aws-glue-etl-components)
+- [AWS Glue DataBrew](#aws-glue-databrew)
+- [AWS Glue Data Catalog](#aws-glue-data-catalog)
+- [AWS Glue Crawlers](#aws-glue-crawlers)
+- [Amazon EMR for Big Data Processing](#amazon-emr-for-big-data-processing)
+- [AWS Glue Workflows](#aws-glue-workflows)
+- [AWS Step Functions for Complex Workflows](#aws-step-functions-for-complex-workflows)
+- [Amazon Managed Workflows for Apache Airflow (MWAA)](#amazon-managed-workflows-for-apache-airflow-mwaa)
+- [Amazon Athena for SQL Analytics](#amazon-athena-for-sql-analytics)
+- [Amazon Redshift for Data Warehousing](#amazon-redshift-for-data-warehousing)
+- [Amazon QuickSight for Data Visualization](#amazon-quicksight-for-data-visualization)
 
-### Amazon Database Migration Service
+## Amazon Database Migration Service
 
 AWS Database Migration Service (DMS) helps migrate databases with minimal downtime:
 
@@ -44,7 +73,8 @@ AWS Database Migration Service (DMS) helps migrate databases with minimal downti
 **Limitations:**
 * May impact source database performance
 
-### Amazon Kinesis for streaming data ingestion
+## Amazon Kinesis for Streaming Data Ingestion
+
 Amazon Kinesis is a managed service for real-time data stream ingestion and processing. It supports various streaming data types including:
 
 * Log files
@@ -54,36 +84,41 @@ Amazon Kinesis is a managed service for real-time data stream ingestion and proc
 
 **Core Kinesis Services:**
 
-1. **Kinesis Data Firehose**
-    * Ingests streaming data
-    * Buffers data for configured period
-    * Writes to targets like:
-      * Amazon S3
-      * Redshift
-      * OpenSearch Service
-      * Splunk
+### Kinesis Data Firehose
 
-2. **Kinesis Data Streams**
-    * Real-time data stream ingestion
-    * Custom application processing
-    * Low latency processing
+* Ingests streaming data
+* Buffers data for configured period
+* Writes to targets like:
+  * Amazon S3
+  * Redshift
+  * OpenSearch Service
+  * Splunk
 
-3. **Kinesis Data Analytics**
-    * Reads from streaming sources
-    * Analyzes using:
-      * SQL statements
-      * Apache Flink code
+### Kinesis Data Streams
 
-4. **Kinesis Video Streams**
-    * Processes video/audio streams
-    * Handles time-serialized data:
-      * Thermal imagery
-      * RADAR data
+* Real-time data stream ingestion
+* Custom application processing
+* Low latency processing
+
+### Kinesis Data Analytics
+
+* Reads from streaming sources
+* Analyzes using:
+  * SQL statements
+  * Apache Flink code
+
+### Kinesis Video Streams
+
+* Processes video/audio streams
+* Handles time-serialized data:
+  * Thermal imagery
+  * RADAR data
 
 **Additional Tool:**
 * Kinesis Agent: Utility for packaging and sending data to Kinesis services
 
-#### Amazon Kinesis Agent
+## Amazon Kinesis Agent
+
 Kinesis Agent is a pre-built tool for streaming file data to Kinesis services:
 
 **Key Features:**
@@ -107,7 +142,7 @@ Kinesis Agent is a pre-built tool for streaming file data to Kinesis services:
 * Direct application events (use KPL/SDK instead)
 * IoT device data streaming
 
-#### Amazon kinesis Firehose
+## Amazon Kinesis Firehose
 
 Kinesis Firehose is a managed service for streaming data ingestion and delivery:
 
@@ -143,7 +178,8 @@ Kinesis Firehose is a managed service for streaming data ingestion and delivery:
 * Custom delivery targets
 * Direct stream processing
 
-#### Amazon kinesis data streams
+## Amazon Kinesis Data Streams
+
 Kinesis Data Streams provides real-time data streaming with sub-second latency:
 
 **Key Features:**
@@ -182,7 +218,7 @@ Kinesis Data Streams provides real-time data streaming with sub-second latency:
 * Simple data delivery workflows
 * Apache Kafka migrations (use MSK)
 
-#### Amazon Kinesis Data Analytics
+## Amazon Kinesis Data Analytics
 
 Kinesis Data Analytics enables real-time stream processing using Apache Flink:
 
@@ -215,7 +251,7 @@ Kinesis Data Analytics enables real-time stream processing using Apache Flink:
 * Batch processing
 * Static data analysis
 
-#### Amazon Kinesis Video Streams
+## Amazon Kinesis Video Streams
 
 Kinesis Video Streams manages video and time-series data ingestion at scale:
 
@@ -249,7 +285,7 @@ Kinesis Video Streams manages video and time-series data ingestion at scale:
 * Basic data streaming
 * Non-time-series data
 
-### Amazon MSK for Streaming Data
+## Amazon MSK for Streaming Data
 
 Amazon MSK is AWS's managed Apache Kafka service offering:
 
@@ -281,7 +317,7 @@ Amazon MSK is AWS's managed Apache Kafka service offering:
 * Simple streaming needs
 * AWS-only deployments
 
-### Amazon AppFlow for SaaS Data Integration
+## Amazon AppFlow for SaaS Data Integration
 
 Amazon AppFlow enables automated data flows between SaaS applications and AWS services:
 
@@ -322,7 +358,7 @@ Amazon AppFlow enables automated data flows between SaaS applications and AWS se
 * Unsupported sources
 * Custom protocols
 
-### AWS Transfer Family
+## AWS Transfer Family
 
 AWS Transfer Family provides managed file transfer services using common protocols (FTP, SFTP, FTPS, AS2):
 
@@ -355,7 +391,7 @@ AWS Transfer Family provides managed file transfer services using common protoco
 * Cost-sensitive workloads
 * Modern API integrations
 
-### AWS DataSync for Multi-Source Ingestion
+## AWS DataSync for Multi-Source Ingestion
 
 AWS DataSync enables efficient data transfer from on-premises and multi-cloud sources:
 
@@ -391,7 +427,7 @@ AWS DataSync enables efficient data transfer from on-premises and multi-cloud so
 * Incompatible storage systems
 * Real-time data streaming
 
-### AWS Snow Family for Large Data Transfers
+## AWS Snow Family for Large Data Transfers
 
 AWS Snow Family offers secure, physical devices for large-scale data transfer and edge computing:
 
@@ -426,7 +462,7 @@ AWS Snow Family offers secure, physical devices for large-scale data transfer an
 * Real-time requirements
 * Frequent small transfers
 
-### AWS Glue for Data Ingestion
+## AWS Glue for Data Ingestion
 
 AWS Glue provides serverless Apache Spark-based data ingestion and transformation:
 
@@ -462,9 +498,7 @@ AWS Glue provides serverless Apache Spark-based data ingestion and transformatio
 * Real-time streaming
 * Cost-sensitive ingestion
 
-## An overview of AWS services for transforming data
-
-### AWS Lambda for Data Transformation
+## AWS Lambda for Data Transformation
 
 AWS Lambda enables serverless code execution for light data transformations:
 
@@ -500,7 +534,7 @@ AWS Lambda enables serverless code execution for light data transformations:
 * Large file processing
 * Cost-sensitive workloads
 
-### AWS Glue ETL Components
+## AWS Glue ETL Components
 
 AWS Glue offers serverless data processing through multiple engines:
 
@@ -542,7 +576,7 @@ AWS Glue offers serverless data processing through multiple engines:
 * Cost-sensitive workloads
 * Real-time requirements
 
-### AWS Glue DataBrew
+## AWS Glue DataBrew
 
 AWS Glue DataBrew is a visual data preparation tool with serverless architecture:
 
@@ -578,7 +612,7 @@ AWS Glue DataBrew is a visual data preparation tool with serverless architecture
 * Custom transformation logic
 * Code-first approaches
 
-### AWS Glue Data Catalog
+## AWS Glue Data Catalog
 
 AWS Glue Data Catalog provides a unified metadata repository compatible with Apache Hive metastore:
 
@@ -619,7 +653,7 @@ AWS Glue Data Catalog provides a unified metadata repository compatible with Apa
 * Document management
 * Non-technical catalogs
 
-### AWS Glue Crawlers
+## AWS Glue Crawlers
 
 AWS Glue Crawlers automatically discover and catalog data source metadata:
 
@@ -660,7 +694,7 @@ AWS Glue Crawlers automatically discover and catalog data source metadata:
 * Custom schema needs
 * Small data volumes
 
-### Amazon EMR for Big Data Processing
+## Amazon EMR for Big Data Processing
 
 Amazon EMR offers managed big data processing with multiple deployment options:
 
@@ -709,9 +743,7 @@ Amazon EMR offers managed big data processing with multiple deployment options:
 * Broader application support
 * Requires more expertise
 
-## An overview of AWS services for orchestrating big data pipelines 
-
-### AWS Glue Workflows
+## AWS Glue Workflows
 
 AWS Glue Workflows orchestrates Glue components for data pipeline management:
 
@@ -750,7 +782,7 @@ AWS Glue Workflows orchestrates Glue components for data pipeline management:
 * No external service integration
 * Basic orchestration needs
 
-### AWS Step Functions for Complex Workflows
+## AWS Step Functions for Complex Workflows
 
 AWS Step Functions provides serverless orchestration for complex data pipelines:
 
@@ -793,7 +825,7 @@ AWS Step Functions provides serverless orchestration for complex data pipelines:
 * Single-service workflows
 * Cost-sensitive operations
 
-### Amazon Managed Workflows for Apache Airflow (MWAA)
+## Amazon Managed Workflows for Apache Airflow (MWAA)
 
 Amazon MWAA provides managed Apache Airflow for workflow orchestration:
 
@@ -843,7 +875,7 @@ Amazon MWAA provides managed Apache Airflow for workflow orchestration:
 * Simple sequential tasks
 * Serverless requirements
 
-### Amazon Athena for SQL Analytics
+## Amazon Athena for SQL Analytics
 
 Amazon Athena provides serverless SQL querying for data lakes:
 
@@ -883,7 +915,7 @@ Amazon Athena provides serverless SQL querying for data lakes:
 * Real-time queries
 * Complex transformations
 
-### Amazon Redshift for Data Warehousing
+## Amazon Redshift for Data Warehousing
 
 Amazon Redshift provides cloud-based data warehousing optimized for OLAP workloads:
 
@@ -926,7 +958,7 @@ Amazon Redshift provides cloud-based data warehousing optimized for OLAP workloa
 * Small datasets
 * Simple analytics
 
-### Amazon QuickSight for Data Visualization
+## Amazon QuickSight for Data Visualization
 
 Amazon QuickSight is a serverless business intelligence service for creating interactive data visualizations:
 
