@@ -1,0 +1,49 @@
+import fastf1
+from fastf1 import plotting
+import os
+
+# Enable caching (ensure the folder exists)
+cache_dir = './f1_cache'
+if not os.path.exists(cache_dir):
+    os.makedirs(cache_dir)
+fastf1.Cache.enable_cache(cache_dir)
+
+def get_fastest_laps_per_driver(year, gp_name, session_type):
+    """
+    Fetches the fastest lap of each driver for a given session and sorts them by lap time.
+    
+    Args:
+        year (int): Season year.
+        gp_name (str): Grand Prix name (e.g., 'Japanese Grand Prix').
+        session_type (str): Session identifier ("R", "Q", "FP1", etc.).
+        
+    Returns:
+        pandas.DataFrame: A DataFrame containing each driver's fastest lap, sorted by lap time.
+    """
+    # Load the session with lap and telemetry data
+    session = fastf1.get_session(year, gp_name, session_type)
+    session.load(laps=True, telemetry=True)
+
+    laps = session.laps
+
+    # Group laps by each driver and find the fastest lap of each
+    fastest_laps = laps.groupby('Driver').apply(lambda df: df.loc[df['LapTime'].idxmin()]).reset_index(drop=True)
+
+    # Sort the fastest laps in ascending order of lap time
+    fastest_laps_sorted = fastest_laps.sort_values('LapTime')
+
+    return fastest_laps_sorted
+
+if __name__ == "__main__":
+    # Parameters for the session
+    year = 2025
+    gp_name = 'Japanese Grand Prix'
+    session_type = 'R'  # Change session type if needed ("R", "Q", "FP1", etc.)
+
+    fastest_laps_df = get_fastest_laps_per_driver(year, gp_name, session_type)
+    if not fastest_laps_df.empty:
+        print("Fastest Lap Details Per Driver (Sorted by Lap Time):")
+        for idx, row in fastest_laps_df.iterrows():
+            print(f"Driver: {row['Driver']} - Lap Number: {row['LapNumber']} - Lap Time: {row['LapTime']}")
+    else:
+        print("No lap data found for the specified session.")
