@@ -1,0 +1,6 @@
+a= int(input())
+b=int(input())
+def multiplicationUnderModulo(a,b):
+     return (a*b)%(10**9+7)
+          
+print(multiplicationUnderModulo(a,b))

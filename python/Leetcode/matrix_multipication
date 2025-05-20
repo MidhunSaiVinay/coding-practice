@@ -1,0 +1,3 @@
+def matrixmultiplication(A,B,n):
+    if n==1:
+        

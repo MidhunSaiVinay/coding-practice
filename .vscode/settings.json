@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./python/Mathematics"
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
+}

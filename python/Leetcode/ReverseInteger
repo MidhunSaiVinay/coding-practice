@@ -1,0 +1,24 @@
+#reverse integer checking for 2^32 to -2^32
+def reverse(x):
+            
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        
+        
+        sign = 1 if x >= 0 else -1
+        x = abs(x)
+        
+        temp = x
+        reversed_x=0
+        while temp>0:
+            ld=temp%10
+            reversed_x=reversed_x*10+ld
+            temp =temp//10
+        reversed_x*=sign
+        
+        if reversed_x > INT_MAX or reversed_x < INT_MIN:
+            return 0
+        
+        return reversed_x
+x=int(input())
+print(reverse(x))

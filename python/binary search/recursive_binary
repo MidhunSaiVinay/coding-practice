@@ -1,0 +1,16 @@
+def bsearch(l,x,low,high):
+    if low>high:
+        return -1
+    mid=(low+high)//2
+    if l[mid]==x:
+        return mid
+    elif l[mid]>x:
+        return bsearch(l,x,low,mid-1)
+    else:
+        return bsearch(l,x,mid+1,high)
+l=[1,3,5,67,86,95,101]
+l.sort()
+x=int(input())
+low=0
+high=len(l)
+print(bsearch(l,x,low,high))

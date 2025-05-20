@@ -1,0 +1,10 @@
+#square root without inbuilt
+def sqrt(x):
+    i=1
+    j=0
+    while i*i<=x:
+        i+=1
+        j+=1
+    return j
+x=int(input())
+print(sqrt(x))

@@ -1,0 +1,7 @@
+def missingNumber( nums) :
+        missing = len(nums)
+        for i, num in enumerate(nums):
+            missing ^= i ^ num
+        return missing
+nums=[0,1,2,4]
+missingNumber( nums)

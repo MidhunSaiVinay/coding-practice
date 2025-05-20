@@ -1,0 +1,8 @@
+def N_asc(n):
+    if n<=0:
+        return
+    print(n)
+    N_asc(n-1)
+n=int(input())
+N_asc(n)
+
